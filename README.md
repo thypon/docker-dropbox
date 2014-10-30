@@ -1,9 +1,9 @@
 Docker! Dropbox! XPRA!
 ==========================
 
-Run Skype inside an isolated [Docker](http://www.docker.io) container on your Linux desktop!
+Run Dropbox inside an isolated [Docker](http://www.docker.io) container on your Linux desktop!
 
-Known Issue: While audio works flawlessly during calls and Skype is perfectly usable, the notification sounds such as call ringing do not work.
+Known Issue: While audio works flawlessly during calls and Dropbox is perfectly usable, the notification sounds such as call ringing do not work.
 
 
 Building Instructions
