@@ -1,11 +1,9 @@
-Docker! Skype! XPRA!
+Docker! Dropbox! XPRA!
 ==========================
 
-Run Skype inside an isolated [Docker](http://www.docker.io) container on your Linux desktop! See its sights via X11 forwarding! Hear its sounds through the magic of PulseAudio and SSH tunnels!
+Run Skype inside an isolated [Docker](http://www.docker.io) container on your Linux desktop!
 
 Known Issue: While audio works flawlessly during calls and Skype is perfectly usable, the notification sounds such as call ringing do not work.
-
-Inspiration from [skype-pulseaudio](https://github.com/tomparys/docker-skype-pulseaudio)
 
 
 Building Instructions
@@ -13,23 +11,13 @@ Building Instructions
 
 1. Build the container
 
-        docker build -t skype .
+        docker build -t dropbox .
 
 2. Run the container and forward the appropriate port
 
-        docker run -d -p 127.0.0.1:22222:22 skype
+        mkdir -p $HOME/Dropbox $HOME/.dropbox
+        docker run -d -v $HOME/Dropbox:/home/docker/Dropbox -v $HOME/.dropbox:/home/docker/.dropbox -p 127.0.0.1:22222:22 dropbox
 
-3. Run skype with XPRA
+3. Run dropbox with XPRA
 
-        xpra start ssh:docker@localhost:22222:10 --start-child=skype
-
-Frequently Asked Questions
-==========================
-
-Why would I want to do this?
-----------------------------
-There are a couple of reasons you might want to restrict Skype's access to your computer:
-
-* It is proprietary Microsoft software
-* The skype binary is disguised against decompiling, so nobody is (still) able to reproduce what it really does.
-* It produces encrypted traffic even when you are not actively using Skype.
+        xpra start ssh:docker@localhost:22222:10 --start-child=dropbox

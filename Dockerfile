@@ -36,12 +36,19 @@ RUN echo "Europe/Rome" > /etc/timezone
 RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
 
 # Install Skype
-RUN sudo add-apt-repository "deb http://archive.canonical.com/ $(lsb_release -sc) partner"
-RUN sudo apt-get update && sudo apt-get install -y skype
-RUN apt-get install -y libpulse0:i386 pulseaudio:i386
+ADD https://linux.dropbox.com/packages/ubuntu/dropbox_1.6.2_amd64.deb /tmp/dropbox.deb
+RUN dpkg -i /tmp/dropbox.deb
+RUN apt-get install -y python-gpgme
+USER docker
+WORKDIR /home/docker
+ENV HOME /home/docker
+RUN sleep 2 && printf 'y\n' | dropbox start -i
 
-# Mantain Skype Config
-VOLUME /home/docker/.Skype
+USER root
+WORKDIR /
+ENV HOME /root
+
+RUN ln -s /home/docker/.dropbox-dist/dropboxd /usr/local/bin/dropboxd
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
