@@ -20,4 +20,4 @@ Building Instructions
 
 3. Run dropbox with XPRA
 
-        xpra start ssh:docker@localhost:22222:10 --start-child=dropboxd
+        xpra attach ssh:docker@localhost:22222:10

@@ -50,5 +50,10 @@ ENV HOME /root
 
 RUN ln -s /home/docker/.dropbox-dist/dropboxd /usr/local/bin/dropboxd
 
+# Adding Dropbox Service
+RUN mkdir /etc/service/dropbox/
+ADD dropbox.sh /etc/service/dropbox/run
+RUN chmod +x /etc/service/dropbox/run
+
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
